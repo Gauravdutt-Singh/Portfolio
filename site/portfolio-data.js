@@ -172,7 +172,7 @@ export default {
       tagline: 'Evaluating the commercial viability of a synthetic, sutureless corneal graft for veterinary ophthalmology.',
       roleTitle: 'Customer discovery & product strategy',
       teamSize: '4 (NC State MBA course)',
-      timeline: 'Fall 2026 semester',
+      timeline: 'Fall 2026 · in progress',
       result: '10x larger addressable market from one validated insight',
       questionLabel: 'The starting point',
       problem: 'A baby is never ugly to its parent.',
