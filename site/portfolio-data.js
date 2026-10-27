@@ -20,7 +20,10 @@ export default {
   // Empty slots show a placeholder box. The hero image also shows as the
   // hover preview on the home page list.
   // e.g. 'passport-hero': 'images/passport-hero.jpg'
-  images: {},
+  // Use { src, focus } to choose which part survives the crop, e.g. focus: 'left'.
+  images: {
+    'passport-hero': { src: 'images/passport-hero.webp', focus: 'left top' }
+  },
 
   // Default chapter names and narrator lines. A project can override any of
   // them with `labels: { <key>: '...' }` and `says: { <key>: '...' }`.

@@ -13,11 +13,19 @@ const total = String(d.projects.length).padStart(2, '0');
 
 const imageIcon = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>';
 
+// An image map entry is a path, or { src, focus } where focus is a CSS
+// object-position ('left', 'top', '30% 50%') that picks which part survives the crop.
+function image(id) {
+  const v = d.images && d.images[id];
+  if (!v) return null;
+  return typeof v === 'string' ? { src: v, focus: '' } : { src: v.src, focus: v.focus || '' };
+}
+
 // An image box: the mapped screenshot if there is one, otherwise a placeholder.
 function slot(id, placeholder, cls = '') {
-  const src = d.images && d.images[id];
-  const inner = src
-    ? `<img src="${esc(src)}" alt="${esc(placeholder)}" loading="lazy">`
+  const im = image(id);
+  const inner = im
+    ? `<img src="${esc(im.src)}" alt="${esc(placeholder)}" loading="lazy"${im.focus ? ` style="object-position:${esc(im.focus)}"` : ''}>`
     : `<div class="slot-empty">${imageIcon}<span>${esc(placeholder)}</span></div>`;
   return `<div class="slot ${cls}">${inner}</div>`;
 }
@@ -303,13 +311,14 @@ function placePeek() {
   if (!hoverP) return;
   el.style.background = tint(hoverP);
   el.style.color = onTint(hoverP);
-  const src = d.images && d.images[hoverP.id + '-hero'];
+  const im = image(hoverP.id + '-hero');
   let img = el.querySelector('img');
-  if (src) {
+  if (im) {
     if (!img) { img = document.createElement('img'); img.alt = ''; el.prepend(img); }
-    img.src = src;
+    img.src = im.src;
+    img.style.objectPosition = im.focus;
   } else if (img) img.remove();
-  el.querySelector('span').textContent = src ? '' : hoverP.name + ' screenshot';
+  el.querySelector('span').textContent = im ? '' : hoverP.name + ' screenshot';
 }
 app.addEventListener('mousemove', e => {
   if (!page.peek) return;

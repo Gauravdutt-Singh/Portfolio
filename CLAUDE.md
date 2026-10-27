@@ -19,7 +19,7 @@ All changes are made through Claude Code, so there is no CMS or in-page editing.
 - The `bio` mentions the kinds of projects; keep it in step when projects change.
 - Optional per-project fields: `result` (cover "Result" line), `labels` / `says` (override a chapter's name or narrator line by chapter key), `questionLabel`, `outcomeNote`, `aside` ("Behind the scenes" note). Metrics are `{ v, s, pre, l }` (counts up) or `{ text, l }` (shown as is). `built` and `learnings` items are `{ t, d }`.
 - Case study copy comes from the case-study notes Gaurav provides; keep his facts and numbers exactly, and only tighten wording.
-- Images: save to `site/images/` (compress to well under 500 KB, ~1600px wide), then map the slot id in `images`. Slot ids: `<id>-hero`, `<id>-research`, `<id>-screen-1/2/3`.
+- Images: save to `site/images/` (compress to well under 500 KB, ~1600px wide), then map the slot id in `images` (a path, or `{ src, focus }` where `focus` is a CSS object-position that keeps the important part in the crop; boxes are 2:1 for hero/research, 3:4 for screens, and the hero also shows as a 4:3 hover preview on the home page). Slot ids: `<id>-hero`, `<id>-research`, `<id>-screen-1/2/3`.
 
 ## Checking changes
 
