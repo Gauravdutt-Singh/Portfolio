@@ -13,10 +13,12 @@ All changes are made through Claude Code, so there is no CMS or in-page editing.
 
 ## Content rules
 
-- Lines marked `// PH` are placeholder copy. When real content replaces a field, drop its `// PH` comment.
+- Never invent facts, numbers or quotes. If something is missing, ask.
 - The number of projects is not fixed. Adding or removing an entry in `projects` updates the list, the counts ("Selected work (05)", "Case study 01 / 05") and the "next project" links automatically.
 - A new project needs: `id` (lowercase, hyphens, used in the URL), `name`, `hue` (0–360, pick one far from the others), `type`, `tagline`, `roleTitle`, `teamSize`, `timeline`, `problem`, `context`, `insights` (3), `roleText`, `team`, `decisions`, `built` (3), `metrics` (first one is the headline stat), `learnings`.
 - The `bio` mentions the kinds of projects; keep it in step when projects change.
+- Optional per-project fields: `result` (cover "Result" line), `labels` / `says` (override a chapter's name or narrator line by chapter key), `questionLabel`, `outcomeNote`, `aside` ("Behind the scenes" note). Metrics are `{ v, s, pre, l }` (counts up) or `{ text, l }` (shown as is). `built` and `learnings` items are `{ t, d }`.
+- Case study copy comes from the case-study notes Gaurav provides; keep his facts and numbers exactly, and only tighten wording.
 - Images: save to `site/images/` (compress to well under 500 KB, ~1600px wide), then map the slot id in `images`. Slot ids: `<id>-hero`, `<id>-research`, `<id>-screen-1/2/3`.
 
 ## Checking changes
