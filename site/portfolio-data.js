@@ -2,7 +2,7 @@
 
 export default {
   name: 'Gauravdutt Singh',
-  short: 'Gaurav',
+  short: 'Gauravdutt',
   role: 'Graduate Assistant, Program Management',
   location: 'Raleigh, USA',
   years: 3,
@@ -10,7 +10,7 @@ export default {
   linkedin: 'https://www.linkedin.com/in/gauravduttsingh',
   roleShort: 'Graduate Assistant, Program Mgmt',
   lede: 'I love building products that people actually use.',
-  bio: "I'm a Graduate Assistant in Program Management with 3 years in product. Campus platforms, a restaurant startup, a clothing brand, vet medtech strategy: different worlds, same job. Find the real problem, then ship something for it.",
+  bio: "I'm a Graduate Assistant doing Program Management at NC State's Entrepreneurship Department. I have 3 years in product and have worked in various domains like campus platforms, a restaurant startup, a clothing brand, vet MedTech, etc. I find real problems, then ship something for them.",
 
   // The talking photo in the corner. side: 'left' or 'right'.
   narrator: { show: true, side: 'left' },
