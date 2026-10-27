@@ -58,7 +58,7 @@ function homeView() {
   <section class="hero" data-say="Hey, I'm ${esc(d.short)}. I'll narrate, you scroll.">
     <div class="hero-top">
       <h1 class="hero-name"><span>${esc(first)}</span><span>${esc(rest.join(' '))}<span class="accent">.</span></span></h1>
-      <img class="portrait" src="assets/gaurav.png" alt="${esc(d.name)}">
+      <img class="portrait" src="assets/gaurav.webp" alt="${esc(d.name)}">
     </div>
     <div class="hero-meta">
       <p class="lede">${esc(d.lede)}</p>

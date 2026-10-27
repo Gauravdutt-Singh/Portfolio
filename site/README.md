@@ -15,4 +15,4 @@ All content is in `portfolio-data.js`. Lines marked `// PH` are placeholder text
   and `<id>-screen-1/2/3`. Empty slots show a placeholder box. The hero image also shows as the
   hover preview on the home page list.
 - **Narrator:** `narrator: { show: true, side: 'left' }`.
-- **Photo:** `assets/gaurav.png`.
+- **Photo:** `assets/gaurav.webp`.
