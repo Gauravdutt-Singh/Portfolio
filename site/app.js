@@ -7,7 +7,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 const n2 = i => String(i + 1).padStart(2, '0');
 const tint = p => `oklch(0.78 0.12 ${p.hue})`;
 const onTint = p => `oklch(0.2 0.03 ${p.hue})`;
-const metric = m => m.v + m.s;
+const metric = m => m.text ?? (m.pre || '') + m.v + m.s;
 const isWide = () => innerWidth >= 960;
 const total = String(d.projects.length).padStart(2, '0');
 
@@ -87,13 +87,17 @@ function caseView(pi) {
   const P = d.projects[pi];
   const N = d.projects[(pi + 1) % d.projects.length];
   const ch = d.chapters;
-  const head = i => `<div class="ch-n">${n2(i)}</div><h2>${esc(ch[i].label)}</h2>`;
+  const label = i => (P.labels || {})[ch[i].key] ?? ch[i].label;
+  const say = i => (P.says || {})[ch[i].key] ?? ch[i].say;
+  const head = i => `<div class="ch-n">${n2(i)}</div><h2>${esc(label(i))}</h2>`;
   const sec = (i, body, extra = '') =>
-    `<section class="chapter" data-chapter="${i}" data-say="${esc(ch[i].say)}"${extra}>${head(i)}${body}</section>`;
+    `<section class="chapter" data-chapter="${i}" data-say="${esc(say(i))}"${extra}>${head(i)}${body}</section>`;
+  // Items can be plain strings or { t, d } (title + description).
+  const item = x => typeof x === 'string' ? { t: x } : x;
 
   const toc = ch.map((c, i) => `
     <a href="#${esc(P.id)}" data-go="${i}">
-      <div class="toc-row"><span class="toc-n">${n2(i)}</span><span class="toc-label">${esc(c.label)}</span></div>
+      <div class="toc-row"><span class="toc-n">${n2(i)}</span><span class="toc-label">${esc(label(i))}</span></div>
       <div class="toc-bar"><i></i></div>
     </a>`).join('');
 
@@ -113,7 +117,7 @@ function caseView(pi) {
       <div><dt class="label">Role</dt><dd>${esc(P.roleTitle)}</dd></div>
       <div><dt class="label">Team</dt><dd>${esc(P.teamSize)}</dd></div>
       <div><dt class="label">Timeline</dt><dd>${esc(P.timeline)}</dd></div>
-      <div><dt class="label">Result</dt><dd>${esc(metric(P.metrics[0]) + ' ' + P.metrics[0].l)}</dd></div>
+      <div><dt class="label">Result</dt><dd>${esc(P.result ?? metric(P.metrics[0]) + ' ' + P.metrics[0].l)}</dd></div>
     </dl>
   </section>
   <div class="cover-shot">${slot(P.id + '-hero', `Hero shot of ${P.name}`)}</div>
@@ -123,7 +127,7 @@ function caseView(pi) {
     <div style="min-width:0">
       ${sec(0, `
         <p class="context">${esc(P.context)}</p>
-        <div class="question"><div class="label">The question</div><blockquote>“${esc(P.problem)}”</blockquote></div>`)}
+        <div class="question"><div class="label">${esc(P.questionLabel || 'The question')}</div><blockquote>“${esc(P.problem)}”</blockquote></div>`)}
 
       ${sec(1, `
         <div class="insights">${P.insights.map((x, i) => `
@@ -147,19 +151,22 @@ function caseView(pi) {
         </div>`)}
 
       ${sec(4, `
-        <div class="built">${P.built.map((b, i) => `
-          <figure>${slot(`${P.id}-screen-${i + 1}`, b)}<figcaption><span>${n2(i)}</span>${esc(b)}</figcaption></figure>`).join('')}
+        <div class="built">${P.built.map(item).map((b, i) => `
+          <figure>${slot(`${P.id}-screen-${i + 1}`, b.t)}<figcaption><span>${n2(i)}</span><div><b>${esc(b.t)}</b>${b.d ? `<p>${esc(b.d)}</p>` : ''}</div></figcaption></figure>`).join('')}
         </div>`)}
 
       ${sec(5, `
-        <div class="metrics">${P.metrics.map(m => `
-          <div class="metric"><b data-v="${m.v}" data-s="${esc(m.s)}">${esc(reduceMotion ? metric(m) : 0 + m.s)}</b><span>${esc(m.l)}</span></div>`).join('')}
-        </div>`, ' data-count')}
+        <div class="metrics">${P.metrics.map(m => m.text != null ? `
+          <div class="metric text"><b>${esc(m.text)}</b><span>${esc(m.l)}</span></div>` : `
+          <div class="metric"><b data-v="${m.v}" data-pre="${esc(m.pre || '')}" data-s="${esc(m.s)}">${esc(reduceMotion ? metric(m) : (m.pre || '') + 0 + m.s)}</b><span>${esc(m.l)}</span></div>`).join('')}
+        </div>
+        ${P.outcomeNote ? `<p class="outcome-note">${esc(P.outcomeNote)}</p>` : ''}`, ' data-count')}
 
       ${sec(6, `
-        <div class="learnings">${P.learnings.map((x, i) => `
-          <div class="learning"><span>${n2(i)}</span><p>${esc(x)}</p></div>`).join('')}
-        </div>`)}
+        <div class="learnings">${P.learnings.map(item).map((x, i) => `
+          <div class="learning"><span>${n2(i)}</span><div><p>${esc(x.t)}</p>${x.d ? `<p class="learning-d">${esc(x.d)}</p>` : ''}</div></div>`).join('')}
+        </div>
+        ${P.aside ? `<div class="aside"><div class="label">Behind the scenes</div><p>${esc(P.aside)}</p></div>` : ''}`)}
     </div>
   </div>
 
@@ -261,7 +268,7 @@ function countUp() {
   const step = now => {
     const t = Math.min(1, (now - t0) / 1600);
     const e = 1 - Math.pow(1 - t, 3);
-    nums.forEach(b => { b.textContent = Math.round(+b.dataset.v * e) + b.dataset.s; });
+    nums.forEach(b => { b.textContent = b.dataset.pre + Math.round(+b.dataset.v * e) + b.dataset.s; });
     if (t < 1) countRaf = requestAnimationFrame(step);
   };
   countRaf = requestAnimationFrame(step);
