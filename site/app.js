@@ -18,7 +18,7 @@ const imageIcon = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" s
 function image(id) {
   const v = d.images && d.images[id];
   if (!v) return null;
-  return typeof v === 'string' ? { src: v, focus: '' } : { src: v.src, focus: v.focus || '' };
+  return typeof v === 'string' ? { src: v, focus: '' } : { src: v.src, focus: v.focus || '', ratio: v.ratio };
 }
 
 // An image box: the mapped screenshot if there is one, otherwise a placeholder.
@@ -27,7 +27,7 @@ function slot(id, placeholder, cls = '') {
   const inner = im
     ? `<img src="${esc(im.src)}" alt="${esc(placeholder)}" loading="lazy"${im.focus ? ` style="object-position:${esc(im.focus)}"` : ''}>`
     : `<div class="slot-empty">${imageIcon}<span>${esc(placeholder)}</span></div>`;
-  return `<div class="slot ${cls}">${inner}</div>`;
+  return `<div class="slot ${cls}"${im && im.ratio ? ` style="aspect-ratio:${esc(im.ratio)}"` : ''}>${inner}</div>`;
 }
 
 // ── Templates ─────────────────────────────────────────

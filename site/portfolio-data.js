@@ -22,7 +22,7 @@ export default {
   // e.g. 'passport-hero': 'images/passport-hero.jpg'
   // Use { src, focus } to choose which part survives the crop, e.g. focus: 'left'.
   images: {
-    'passport-hero': { src: 'images/passport-hero.webp', focus: 'left top' }
+    'passport-hero': { src: 'images/passport-hero.webp', focus: 'left top', ratio: '1600 / 737' }
   },
 
   // Default chapter names and narrator lines. A project can override any of
