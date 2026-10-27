@@ -26,3 +26,7 @@ Serve with `python3 -m http.server` from `site/` (ES modules don't load from `fi
 ## Workflow
 
 Work on a branch and open a pull request into `main`; don't commit to `main` directly.
+
+## Hosting
+
+GitHub Pages. `.github/workflows/deploy.yml` publishes `site/` on every push to `main`, so merging a pull request updates the live site within a minute or two.
