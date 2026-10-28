@@ -13,6 +13,7 @@ export default {
   bio: "I'm a Graduate Assistant doing Program Management at NC State's Entrepreneurship Department. I have 3 years in product and have worked in various domains like campus platforms, a restaurant startup, a clothing brand, vet MedTech, etc. I find real problems, then ship something for them.",
 
   // The talking photo in the corner. side: 'left' or 'right'.
+  // Shown only on computers (mouse or trackpad), never on phones or tablets.
   narrator: { show: true, side: 'left' },
 
   // Screenshots. Put files in site/images/ and map slot ids to paths here.

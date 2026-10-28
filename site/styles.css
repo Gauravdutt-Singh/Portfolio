@@ -273,6 +273,8 @@ img { display: block; }
 
 .narrator { position: fixed; left: 0; top: 0; z-index: 70; width: 68px; height: 68px; }
 .narrator[hidden] { display: none; }
+/* Only on computers with a mouse or trackpad; phones and tablets skip the narrator. */
+@media (hover: none), (pointer: coarse) { .narrator { display: none; } }
 .bubble {
   position: absolute; left: 0; bottom: calc(100% + 14px);
   width: max-content; max-width: min(280px, 72vw); padding: 12px 16px;
