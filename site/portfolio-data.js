@@ -16,6 +16,9 @@ export default {
   // Shown only on computers (mouse or trackpad), never on phones or tablets.
   narrator: { show: true, side: 'left' },
 
+  // Thin notice above the header on every page. Set to '' to remove it.
+  banner: 'Work in progress: all content is up to date. Screenshots and images are on the way.',
+
   // Screenshots. Put files in site/images/ and map slot ids to paths here.
   // Slot ids per project: <id>-hero, <id>-research, <id>-screen-1, -2, -3.
   // Empty slots show a placeholder box. The hero image also shows as the
