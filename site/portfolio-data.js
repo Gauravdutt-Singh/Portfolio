@@ -212,53 +212,6 @@ export default {
         { t: "An inventor's advantages aren't automatically the market's priorities.", d: 'Good-to-have vs. critical-to-have is the line that decides whether a product is fundable, not how impressive the lab result is.' },
         { t: 'Interrogate market size before you fall in love with a product.', d: 'A technically elegant niche solution with too small a SAM isn’t a viable standalone business. Expanding the addressable market is what made the opportunity real.' }
       ]
-    },
-    {
-      id: 'mentorship-portal',
-      name: 'Mentorship Portal',
-      hue: 95,
-      type: 'Campus platform · Automation',
-      tagline: "Rebuilding how NC State's Entrepreneurship department pairs 160 mentors with student mentees, from a week down to a day.",
-      roleTitle: 'Product lead & solo builder',
-      teamSize: 'Just me',
-      timeline: 'Aug 2026 – present, nearing launch',
-      result: '1 week → 1 day turnaround (target)',
-      problem: 'How do you cut a week-long manual match down to a day, without logins and without putting student data at risk?',
-      context: 'The department runs a mentorship program pairing students, whether they are curious about entrepreneurship or already running a business, with mentors who have real industry experience. It also supplies mentors for panels and courses. That is about 160 mentors and roughly 20 active student requests at a time. The process was fully manual: one form to request a mentor, a separate form to apply as one, and a match took about a week.',
-      labels: { insights: 'Constraints & risks' },
-      says: {
-        insights: 'Three things shaped every decision.',
-        role: 'Solo build. AI did the typing, I did the thinking.',
-        built: 'This is what’s about to ship.',
-        metrics: "It's nearly live, so these are the targets.",
-        learnings: 'What this build has taught me so far.'
-      },
-      insights: [
-        { t: 'A week was too slow', d: 'Two separate manual forms and no automated matching meant a student waited roughly a week to get paired with a mentor. That was the clearest target for the rebuild.' },
-        { t: 'Login was a dealbreaker', d: 'Requiring an account, for mentors or students, added friction neither side would tolerate. The flow had to capture everything needed without forcing anyone to log in.' },
-        { t: 'The AI nearly broke the architecture', d: 'Mid-build, the agent writing code started deviating from the locked data architecture. A second, independent agent reviewing its pull requests caught it before it shipped. Left unnoticed, it could have meant real legal and financial exposure for the department.' }
-      ],
-      roleText: "I'm building this portal on my own: the architecture, the data flow and the build itself, done through Claude Code. Because it handles student data, security wasn't a tradeoff against speed. It was the first constraint everything else had to fit inside.",
-      team: ['Me: product, architecture, build and security (AI-assisted)'],
-      decisions: [
-        { chose: 'Lock the full data architecture and phasing before writing any code', over: 'Prompting straight into building features', why: 'This handles student data. The flow had to be secure by design before a single feature got built.' },
-        { chose: 'Build with one AI agent, review with a second, independent one', over: "Trusting a single agent's pull request and shipping it", why: 'It caught the one moment an agent deviated from the locked architecture, a miss that could have meant real legal and financial exposure for the department.' },
-        { chose: 'A no-login flow for both mentors and students', over: 'Requiring an account to track requests and applications', why: 'Any login requirement added friction neither side would tolerate, and removing friction was the entire point of the rebuild.' }
-      ],
-      built: [
-        { t: 'Automated mentor-mentee matching', d: 'Replacing two manual forms and a week-long wait with a near-immediate pairing flow.' },
-        { t: 'A no-login intake', d: 'For mentors and students, still capturing everything the department needs for tracking and data collection.' },
-        { t: 'A security-first data architecture', d: 'Locked before the build started and checked by an independent review agent on every change.' }
-      ],
-      metrics: [
-        { pre: '~', v: 160, s: '', l: 'mentors in the matching pool, with ~20 active student requests at a time' },
-        { text: '1 week → 1 day', l: 'the turnaround the rebuild is designed to hit' }
-      ],
-      learnings: [
-        { t: 'A second AI agent reviewing the first is a safeguard, not overhead.', d: 'An independent review agent on every pull request caught an architecture deviation that could have created real legal and financial exposure. It is now a core part of how I build.' },
-        { t: 'Removing friction can matter as much as adding features.', d: 'Dropping the login requirement for both sides mattered to adoption as much as anything in the matching logic itself.' }
-      ],
-      aside: 'I work in a 20-60-20 split with AI. The first 20% is me: the goal, audience, scope and constraints. AI does the next 60%, the monotonous build work. The last 20% is me again, fact-checking, editing and catching hallucinations. This project is the clearest example of why that last 20% matters.'
     }
   ]
 };
