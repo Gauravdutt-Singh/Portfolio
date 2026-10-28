@@ -32,3 +32,5 @@ Work on a branch and open a pull request into `main`; don't commit to `main` dir
 ## Hosting
 
 GitHub Pages. `.github/workflows/deploy.yml` publishes `site/` on every push to `main`, so merging a pull request updates the live site within a minute or two.
+
+Live at https://gauravdutt.com (custom domain registered at Porkbun, set in the repo's Pages settings; the old github.io address redirects there). The domain lives in the Pages settings, not in a CNAME file, because the site deploys through Actions.
