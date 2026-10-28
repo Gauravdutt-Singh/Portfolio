@@ -32,6 +32,10 @@ function slot(id, placeholder, cls = '') {
 
 // ── Templates ─────────────────────────────────────────
 
+const banner = () => d.banner
+  ? `<div class="banner" role="note"><span class="banner-dot" aria-hidden="true"></span>${esc(d.banner)}</div>`
+  : '';
+
 function homeView() {
   const [first, ...rest] = d.name.split(' ');
   const rows = d.projects.map((p, i) => `
@@ -45,7 +49,7 @@ function homeView() {
       <div class="row-stat"><b>${esc(metric(p.metrics[0]))}</b><span>${esc(p.metrics[0].l)}</span></div>
     </a>`).join('');
 
-  return `
+  return `${banner()}
   <header class="topbar mono">
     <a class="home" href="#">${esc(d.name)}</a>
     <nav>
@@ -111,6 +115,7 @@ function caseView(pi) {
 
   return `
   <div class="progress"></div>
+  ${banner()}
   <header class="casebar mono">
     <a class="back" href="#">← Index</a>
     <span class="title">${esc(P.name)}</span>
