@@ -13,8 +13,8 @@ export default {
   bio: "I'm a Graduate Assistant doing Program Management at NC State's Entrepreneurship Department. I have 2.5 years in product and have worked in various domains like campus platforms, a restaurant startup, a clothing brand, vet MedTech, etc. I find real problems, then ship something for them.",
 
   // The talking photo in the corner. side: 'left' or 'right'.
-  // Shown only on computers (mouse or trackpad), never on phones or tablets.
-  narrator: { show: true, side: 'left' },
+  // Turned off everywhere for now; set show: true to bring it back (computers only).
+  narrator: { show: false, side: 'left' },
 
   // Thin notice above the header on every page. Set to '' to remove it.
   banner: 'Work in progress: all content is up to date. Screenshots and images are on the way.',
